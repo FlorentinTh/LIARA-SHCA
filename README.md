@@ -2,7 +2,7 @@
 
 ## Step#0 - Prerequisites 🔰
 ---
-Download the latest Raspbian operating system image [here](https://www.raspberrypi.org/downloads/raspbian/). The client require desktop version while boards that are part of the Kubernetes cluster require the light version. 
+Download the latest Raspbian operating system image [here](https://www.raspberrypi.org/downloads/raspbian/). The client require desktop version while boards that are part of the Swarm cluster require the light version. 
 
 ### Initial configuration 🔨
 
@@ -16,7 +16,7 @@ sudo raspi-config
 * enable ssh
 
 ### Wi-Fi ⛔
-If needed, a Wi-Fi connection can be configured. However, it is highly recommended for each raspberry pi that is a part of the Kubernetes cluster to stay in a local network environment. 
+If needed, a Wi-Fi connection can be configured. However, it is highly recommended for each raspberry pi that is a part of the Swarm cluster to stay in a local network environment. 
 
 * edit configuration file :
 ```
@@ -44,11 +44,17 @@ _The output of the command should be **OK**_.
 sudo apt-get update && sudo apt-get dist-upgrade -y
 ```
 
+### Tools 🔨
+
+```
+sudo apt-get update && sudo apt-get dist-upgrade -y
+```
+
 ## Step#1 - Disable swap 🚫
 ***
 ❌ **_The client device does not require swap to be disabled_**.
 
-✔ **_Each node of the Kubernetes cluster including master one require swap to be disabled._**
+✔ **_Each node of the Swarm cluster including master one require swap to be disabled._**
 ***
 ``` 
 sudo dphys-swapfile swapoff
@@ -72,7 +78,7 @@ sudo reboot
 ***
 ❌ **_The client device does not require docker to be installed._**
 
-✔ **_Each node of the Kubernetes cluster including master one require Docker to be installed._**
+✔ **_Each node of the Swarm cluster including master one require Docker to be installed._**
 ***
 ```
 curl -sSL get.docker.com | sh
@@ -156,8 +162,8 @@ gpu_freq=400
 ```
 sudo reboot
 ``` 
-
-### Enable ZRAM Optimization
+ 
+### Enable ZRAM Optimization ⏱
 ***
 ❌ **_Each node of the Swarm cluster including master one do not require ZRAM to be enabled._**
 
