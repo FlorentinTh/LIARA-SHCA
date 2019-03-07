@@ -201,5 +201,5 @@ sudo nano /etc/rc.local
 ```
 * insert the following command before ```exit 0``` :
 ```
-/usr/bin/zram.sh $
+/usr/bin/zram.sh &
 ```
