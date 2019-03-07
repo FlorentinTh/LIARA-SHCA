@@ -44,8 +44,7 @@ _The output of the command should be **OK**_.
 sudo apt-get update && sudo apt-get dist-upgrade -y
 ```
 
-### Tools 🔨
-
+### Tools 🔧
 ```
 sudo apt-get update && sudo apt-get dist-upgrade -y
 ```
