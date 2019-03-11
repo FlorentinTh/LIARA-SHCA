@@ -10,10 +10,27 @@ Download the latest Raspbian operating system image [here](https://www.raspberry
 ```
 sudo raspi-config
 ```
-
-* change default raspberry password for user "pi"
 * change hostname
 * enable ssh
+
+### Change default user 👨‍
+* switch to root user : 
+```
+sudo -i
+```
+* create a new user as a sudoer : 
+```
+adduser <new_username>
+adduser <new_username> sudo
+``` 
+* delete default pi user : 
+```
+sudo deluser pi
+```
+* lock root account password :
+```
+sudo passwd -l root 
+```
 
 ### Wi-Fi ⛔
 If needed, a Wi-Fi connection can be configured. However, it is highly recommended for each raspberry pi that is a part of the Swarm cluster to stay in a local network environment. 
