@@ -2,7 +2,7 @@
 
 ## Step#0 - Prerequisites 🔰
 ---
-Download the latest Raspbian operating system image [here](https://www.raspberrypi.org/downloads/raspbian/). The client require desktop version while boards that are part of the Swarm cluster require the light version. 
+* Download the latest Raspbian operating system image [here](https://www.raspberrypi.org/downloads/raspbian/). The client require desktop version while boards that are part of the Swarm cluster require the light version. 
 
 ### Initial configuration 🔨
 
@@ -11,9 +11,27 @@ Download the latest Raspbian operating system image [here](https://www.raspberry
 sudo raspi-config
 ```
 * change hostname
+* change local & time zone
 * enable ssh
 
-### Change default user 👨‍
+### Assign fixed IP address 🔗
+* edit the following file : 
+```
+sudo nano /etc/dhcpcd.conf
+```
+* add following lines to the end of the file : 
+```
+interface <eth0|wlan0>
+static ip_address=<your_@IP_here>/24
+static routers=<@IP_of_gateway_here>
+static domain_name_servers=<@IP_of_gateway_here>
+```
+* restart the network service : 
+```
+ sudo /etc/init.d/networking restart
+```
+
+### Change default user 👥
 * switch to root user : 
 ```
 sudo -i
@@ -63,10 +81,10 @@ sudo apt-get update && sudo apt-get dist-upgrade -y
 
 ### Tools 🔧
 ```
-sudo apt-get update && sudo apt-get dist-upgrade -y
+sudo apt-get install git -y
 ```
 
-## Step#1 - Disable swap 🚫
+### Disable swap 🚫
 ***
 ❌ **_The client device does not require swap to be disabled_**.
 
@@ -90,7 +108,7 @@ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 sudo reboot
 ``` 
 
-## Step#2 - Install Docker 🐳
+## Step#1 - Install Docker 🐳
 ***
 ❌ **_The client device does not require docker to be installed._**
 
@@ -98,36 +116,46 @@ sudo reboot
 ***
 ```
 curl -sSL get.docker.com | sh
-sudo usermod pi -aG docker 
+sudo usermod <username> -aG docker 
 newgrp docker
 ```
-
-## Step#3 - Create the Swarm 🌊
+***
+**⚠ _Only on master node_**
+*** 
+* install python and pip :
+```
+sudo apt-get install -y python python-pip
+```
+* install docker-compose :
+```
+sudo pip install docker-compose
+```
+## Step#2 - Create the Swarm 🌊
 
 ***
 **⚠ _Only on master node_**
 *** 
-run the following command to init the swarm :
+* run the following command to init the swarm :
 ```
 docker swarm init --advertise-addr <@ip_of_master_node>
 ```
-if you want to add a worker node later, run following command :
+* if you want to add a worker node later, run following command :
 ```
 docker swarm join-token worker
 ```
-if you want to add a manager node later, run following command :
+* if you want to add a manager node later, run following command :
 ```
 docker swarm join-token manager
 ```
 ***
-**⚠ _Only on worker nodes_**
+**⚠ _All nodes_**
 *** 
-Run the following command to join the swarm :
+* Run the following command on either worker or manager nodes to let them join the swarm :
 ```
 docker swarm join --token <generated_token> <@ip_of_master_node>:2377
 ```
 
-## Step#4 - Deploy a Swarm Administration GUI 👑
+## Step#3 - Deploy a Swarm Administration GUI 👑
 
 ***
 **⚠ _Only on master node_**
