@@ -89,7 +89,7 @@ htpasswd -Bbn <username> <password> > auth/htpasswd
 
 * run the following command to get the compose file : 
 ```
-curl registry.yml
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/registry.yml?token=ACX0vU_gfXEYmDwApdfmQEiaHXh-9DkCks5cmVT6wA%3D%3D -o registry.yml
 ```
 * build and start the container :
 ```
