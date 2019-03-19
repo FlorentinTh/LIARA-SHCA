@@ -62,15 +62,18 @@ docker swarm join --token <generated_token> <@ip_of_master_node>:2377
 
 ### 2.4 Deploy a GUI to manage the swarm
 
-* run the following command to get the [portainer](www.portainer.io) compose file :
+* run the following command to get the [portainer](http://www.portainer.io/) compose file :
 ```
- curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
+ curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/portainer.yml?token=ACX0vbcWxfkK06CYIZqVEnrnnygQUnbwks5cmoVIwA%3D%3D -o /tmp/portainer.yml
 ```
 * deploy the stack : 
 ```
-docker stack deploy --compose-file=portainer-agent-stack.yml portainer
+docker stack deploy --compose-file=/tmp/portainer.yml portainer
 ```
-_It will automatically deploy a single instance of the Portainer Server, and deploy the Portainer Agent as a global service on every node in the cluster_
+It will automatically deploy a single instance of the Portainer Server, and deploy the Portainer Agent as a global service on every node in the cluster.
+
+_**Issue** : wait for portainer v1.20.2 or 1.21 (external DB feature) to enable HA on the swarm with more than one replica of the service._
+
 * access the GUI through a browser : 
 ```
 http://@IP_of_master_node:9000
@@ -101,11 +104,11 @@ sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout docker_data/certs/domai
 
 * run the following command to get the compose file : 
 ```
-curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/registry.yml?token=ACX0vU_gfXEYmDwApdfmQEiaHXh-9DkCks5cmVT6wA%3D%3D -o registry.yml
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/registry.yml?token=ACX0vU_gfXEYmDwApdfmQEiaHXh-9DkCks5cmVT6wA%3D%3D -o /tmp/registry.yml
 ```
 _make sure to uncomment commented line if you want to use SSL_
 
 * build and start the container :
 ```
-docker-compose -f "registry.yml" up -d --build
+docker-compose -f "/tmp/registry.yml" up -d --build
 ```
