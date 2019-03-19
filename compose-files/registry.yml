@@ -1,13 +1,17 @@
 registry:
   restart: always
   container_name: registry
-  image: registry:2
+  image: registry:latest
   ports:
     - 5000:5000
   environment:
     REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+    # REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    # REGISTRY_HTTP_TLS_KEY: /certs/domain.key
     REGISTRY_AUTH: htpasswd
     REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
     REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
   volumes:
-    - ./auth:/auth
+    - /docker_data/images:/var/lib/registry
+    # - /docker_data/certs:/certs
+    - /docker_data/auth:/auth
