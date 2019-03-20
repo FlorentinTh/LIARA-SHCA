@@ -16,16 +16,25 @@ sudo usermod <username> -aG docker
 newgrp docker
 ```
 
-### 2.2 Install Docker Compose
+### 2.2 Install Docker Compose and Docker Machine
 
-* install python and ```pip``` :
+* install required package : 
 ```
-sudo apt-get install -y python python-pip
+sudo apt-get install dirmngr --install-recommends
 ```
+* add new sources from Hypriot: 
+```
+echo "deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ jessie main" | sudo tee /etc/apt/sources.list.d/hypriot.list
 
-* install ```docker-compose``` through ```pip``` command :
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F
 ```
-sudo pip install docker-compose
+* update packages : 
+```
+sudo apt-get update
+```
+* Install Docker Compose and Docker Machine :
+```
+sudo apt-get install docker-machine docker-compose
 ```
 
 ### 2.3 Create the swarm
@@ -34,14 +43,14 @@ sudo pip install docker-compose
 
 * initialize the swarm :
 ```
-docker swarm init --advertise-addr <@ip_of_master_node>
+docker swarm init --listen-addr <@ip_of_leader_master_node> --advertise-addr <@ip_of_leader_master_node>
 ```
 
 * obtain the join command for manager nodes :
 ```
 docker swarm join-token manager
 ```
-* obtaine the join command for worker nodes :
+* obtain the join command for worker nodes :
 ```
 docker swarm join-token worker
 ```
@@ -50,14 +59,19 @@ docker swarm join-token worker
 
 * join the swarm as a **manager** node :
 ```
-docker swarm join --token <generated_token> <@ip_of_master_node>:2377
+docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
 
 <span style="color:red">⚠ only for the following nodes : </span> **<span style="color:red">node1, node2, node3.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
 * join the swarm as **worker** nodes :
 ```
-docker swarm join --token <generated_token> <@ip_of_master_node>:2377
+docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
+```
+
+* create an overlay network : 
+```
+docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
 ```
 
 ### 2.4 Deploy a GUI to manage the swarm
