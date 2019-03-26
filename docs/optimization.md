@@ -1,5 +1,4 @@
 ## 4. Optimization
----
 
 ### 4.1. Overclocking
 **<span style="color:red">⚠ Overclocking a Raspberry Pi board can cause hardware damages. Do it at your own risk.</span>**

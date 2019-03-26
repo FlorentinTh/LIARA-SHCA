@@ -1,5 +1,4 @@
 ## 1. Initial Configuation
----
 
 ### 1.1. Initialisation
 
