@@ -1,7 +1,7 @@
-## 3. Optimization
+## 4. Optimization
 ---
 
-### 3.1 Overclocking
+### 4.1. Overclocking
 **<span style="color:red">⚠ Overclocking a Raspberry Pi board can cause hardware damages. Do it at your own risk.</span>**
 
 * edit configuration file :
@@ -32,7 +32,7 @@ gpu_freq=400
 sudo reboot
 ``` 
 
-### 3.2 ZRAM Optimization
+### 4.2. ZRAM Optimization
 
 **<span style="color:red">⚠ only required for nodes with a GUI. </span>**
 

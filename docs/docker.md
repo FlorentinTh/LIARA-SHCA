@@ -1,7 +1,7 @@
-## 2. Docker
+## 3. Docker
 ---
 
-### 2.1 Install Docker
+### 3.1. Install Docker
 
 * execute the installation command as follows :
 ```
@@ -16,7 +16,7 @@ sudo usermod <username> -aG docker
 newgrp docker
 ```
 
-### 2.2 Install Docker Compose and Docker Machine
+### 3.2. Install Docker Compose and Docker Machine
 
 * install required package : 
 ```
@@ -37,7 +37,7 @@ sudo apt-get update
 sudo apt-get install docker-machine docker-compose
 ```
 
-### 2.3 Create the swarm
+### 3.3. Create the swarm
 
 <span style="color:red">⚠ only on the </span> **<span style="color:red">master</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
@@ -74,7 +74,7 @@ docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
 ```
 
-### 2.4 Deploy a GUI to manage the swarm
+### 3.4. Deploy a GUI to manage the swarm
 
 * run the following command to get the [portainer](http://www.portainer.io/) compose file :
 ```
@@ -82,7 +82,7 @@ docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-ne
 ```
 * deploy the stack : 
 ```
-docker stack deploy --compose-file=/tmp/portainer.yml portainer
+docker stack deploy -c /tmp/portainer.yml portainer
 ```
 It will automatically deploy a single instance of the Portainer Server, and deploy the Portainer Agent as a global service on every node in the cluster.
 
@@ -93,7 +93,7 @@ _**Issue** : wait for portainer v1.20.2 or 1.21 (external DB feature) to enable 
 http://@IP_of_master_node:9000
 ```
 
-### 2.5 Deploy a private registry
+### 3.5. Deploy a private registry
 
 <span style="color:red">⚠ only on the </span> **<span style="color:red">registry</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
