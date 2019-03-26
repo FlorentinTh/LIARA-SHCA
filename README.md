@@ -1,15 +1,22 @@
 # Raspberry Pi Cluster Architecture
 ---
 
-### Setup
+Main repository of the raspberry pi cluster deployed as part of one of my Ph. D. thesis projects. 
 
-![network-scheme.jpg](/assets/images/network-scheme.jpg "Philadelphia's Magic Gardens")
+#
+
+![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
 
 ### Prerequisites
 
-Download the latest Raspbian operating system images [here](https://www.raspberrypi.org/downloads/raspbian/). Every node require the light version with the exception of the client node that can run a desktop version.
+Download the latest Raspbian operating system images [here](https://www.raspberrypi.org/downloads/raspbian/). Every node require the **light version**.
 
-### Table of Contents
+### Authors
+
+* [**Florentin Thullier**](https://github.com/FlorentinTh) - 2019
+
+### Documentation
+#####Table of Contents
 - [1. Initial configuation](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#11-initialisation)
    - [1.1. Initialisation](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#11-initialisation) 
    - [1.2. Static IP address configuration](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#12-setup-static-ip-addresses) 
@@ -29,3 +36,14 @@ Download the latest Raspbian operating system images [here](https://www.raspberr
 - [4. Optimization](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/optimization.md#3-optimization)
     - [4.1. Overclocking](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/optimization.md#31-overclocking)
     - [4.2. ZRAM Optimization](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/optimization.md#32-zram-optimization)
+
+### Docker containers
+
+* [**example**]()
+  > description
+* [**example**]()
+  > description
+
+### License
+
+This project is licensed under the Apache-2.0 License - see the [LICENSE.md](LICENSE.md) file for details
