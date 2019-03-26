@@ -16,7 +16,7 @@ Download the latest Raspbian operating system images [here](https://www.raspberr
 * [**Florentin Thullier**](https://github.com/FlorentinTh) - 2019
 
 ### Documentation
-####Table of Contents
+**Table of Contents**
 - [1. Initial configuation](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#11-initialisation)
    - [1.1. Initialisation](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#11-initialisation) 
    - [1.2. Static IP address configuration](https://github.com/FlorentinTh/PiSwarm/blob/master/docs/initial-config.md#12-setup-static-ip-addresses) 
