@@ -22,7 +22,7 @@ newgrp docker
 ```
 sudo apt-get install dirmngr --install-recommends
 ```
-* add new sources from Hypriot: 
+* add new sources from Hypriot : 
 ```
 echo "deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ jessie main" | sudo tee /etc/apt/sources.list.d/hypriot.list
 
@@ -32,14 +32,14 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F
 ```
 sudo apt-get update
 ```
-* Install Docker Compose and Docker Machine :
+* install Docker Compose and Docker Machine :
 ```
 sudo apt-get install docker-machine docker-compose
 ```
 
 ### 3.3. Create the swarm
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">master</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
 * initialize the swarm :
 ```
@@ -55,14 +55,14 @@ docker swarm join-token manager
 docker swarm join-token worker
 ```
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">node0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager1</span>** <span style="color:red">and the</span> **<span style="color:red">manager2</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
 * join the swarm as a **manager** node :
 ```
 docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
 
-<span style="color:red">⚠ only for the following nodes : </span> **<span style="color:red">node1, node2, node3.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only for the following nodes : </span> **<span style="color:red">worker0, worker1, worker2.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
 * join the swarm as **worker** nodes :
 ```
@@ -86,34 +86,23 @@ docker stack deploy -c /tmp/portainer.yml portainer
 ```
 It will automatically deploy a single instance of the Portainer Server, and deploy the Portainer Agent as a global service on every node in the cluster.
 
-_**Issue** : wait for portainer v1.20.2 or 1.21 (external DB feature) to enable HA on the swarm with more than one replica of the service._
-
 * access the GUI through a browser : 
 ```
-http://@IP_of_master_node:9000
+http://@IP_of_any_node:9000
 ```
 
 ### 3.5. Deploy a private registry
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">registry</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
-
-* create the base directory where images are stored on host :
-```
-sudo mkdir -p /docker_data/images
-```
+<span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
 * create an authentication file :
 ```
-sudo mkdir -p /docker_data/auth
-
-sudo htpasswd -Bbn <username> <password> > /docker_data/auth/htpasswd
+sudo htpasswd -Bbn <username> <password> > /media/storage/nfs/registry/auth/htpasswd
 ```
 
 * _(optionnal) if you want to use SSL for your private registry_ : 
 ```
-sudo mkdir -p /docker_data/certs/
-
-sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout docker_data/certs/domain.key -x509 -days 365 -out /docker_data/certs/domain.crt
+sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout /media/storage/nfs/certs/domain.key -x509 -days 365 -out /media/storage/nfs/certs/domain.crt
 ```
 
 * run the following command to get the compose file : 

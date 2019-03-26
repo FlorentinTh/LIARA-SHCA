@@ -18,7 +18,7 @@ sdram_freq=500
 core_freq=500
 disable_splash=1
 ```
-* for node with a GUI set the following configuration : 
+* for nodes with a GUI set the following configuration : 
 ```
 gpu_mem=400
 arm_freq=1350

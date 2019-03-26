@@ -84,8 +84,6 @@ sudo apt-get install -y git apache2-utils
 
 ### 1.6. Disable swap
 
-<span style="color:red">⚠ swap sould be disabled only for the following nodes : </span> **<span style="color:red">registry, master, node0, node1, node2, node3.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
-
 * execute the following commands :
 ``` 
 sudo dphys-swapfile swapoff

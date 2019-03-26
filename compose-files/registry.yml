@@ -14,6 +14,6 @@ registry:
     REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
     REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
   volumes:
-    - /docker_data/images:/var/lib/registry
+    - /media/storage/nfs/registry/images:/var/lib/registry
     # - /docker_data/certs:/certs
-    - /docker_data/auth:/auth
+    - /media/storage/nfs/registry/auth:/auth
