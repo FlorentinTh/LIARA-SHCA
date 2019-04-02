@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   agent:
-    image: portainer/agent
+    image: portainer/agent:latest
     environment:
       AGENT_CLUSTER_ADDR: tasks.agent
       AGENT_SECRET: portainer
@@ -22,7 +22,7 @@ services:
         constraints: [node.platform.os == linux]
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer:latest
     environment:
       AGENT_SECRET: portainer
     # command: -H unix:///var/run/docker.sock
