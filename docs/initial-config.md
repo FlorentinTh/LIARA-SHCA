@@ -27,7 +27,21 @@ static domain_name_servers=<@IP_of_the_router>
  sudo /etc/init.d/networking restart
 ```
 
-### 1.3. Create de new user
+### 1.3. Disabling IPv6
+* edit the following file : 
+```
+sudo nano /etc/sysctl.conf
+```
+* add the following line to the end of the file : 
+```
+net.ipv6.conf.all.disable_ipv6=1
+```
+* apply changes : 
+```
+sudo sysctl -p
+```
+
+### 1.4. Create de new user
 * switch to root user : 
 ```
 sudo -i
@@ -50,7 +64,7 @@ sudo passwd -l root
 sudo rm -Rfv /home/pi/
 ```
 
-### 1.4. Configure Wi-Fi
+### 1.5. Configure Wi-Fi
 If needed, a Wi-Fi connection can be configured.
 
 * edit configuration file :
@@ -73,15 +87,15 @@ sudo wpa_cli -i wlan0 reconfigure
 ```
 _The output of the command should be **OK**_.
 
-### 1.5. Install updates and required tools
+### 1.6. Install updates and required tools
 
 ```
 sudo apt-get update && sudo apt-get -y dist-upgrade
 
-sudo apt-get install -y git apache2-utils
+sudo apt-get install -y git apache2-utils python python-dev python-pip libffi-dev
 ```
 
-### 1.6. Disable swap
+### 1.7. Disabling swap
 
 * execute the following commands :
 ``` 
@@ -100,4 +114,4 @@ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 * reboot 
 ```
 sudo reboot
-``` 
+```  

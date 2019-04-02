@@ -4,7 +4,7 @@
 
 * install required dependencies 
 ```
-sudo apt-get intall nfs-common
+sudo apt-get install nfs-common -y
 ```
 
 ### 2.2. Create the NFS server
@@ -13,7 +13,7 @@ sudo apt-get intall nfs-common
 
 * install required dependencies :
 ```
-sudo apt-get intall nfs-server
+sudo apt-get install nfs-server -y
 ```
 
 * if your drive is a NTFS volume install the required driver :
@@ -39,10 +39,7 @@ sudo fdisk -l
 sudo nano /etc/fstab
 
 # add this line to the end of the file :
-/dev/sda2 /media/storage  ntfs-3g defaults,uid=1001,gid=1001,dmask=002,fmask=113,rw 0 0
-
-# uid and gid values are obtained through this command :
-id <username>
+/dev/sda2 /media/storage  ntfs-3g defaults,rw 0 0
 ```
 
 * reboot :
@@ -64,6 +61,19 @@ sudo nano /etc/exports
 /media/storage/nfs  192.168.1.0/24(rw,sync,no_subtree_check)
 ```
 
+* disable NFSv4 :
+```
+sudo nano /etc/default/nfs-kernel-server
+
+# replace the second line : 
+RPCNFSDCOUNT=8
+# by : 
+RPCNFSDCOUNT="8 --no-nfs-version 4"
+
+# restart the service
+systemctl restart nfs-kernel-server
+```
+
 * start the NFS server :
 ```
 sudo update-rc.d rpcbind enable
@@ -77,4 +87,27 @@ mkdir -p /media/storage/nfs/registry/images
 mkdir -p /media/storage/nfs/registry/auth
 mkdir -p /media/storage/nfs/certs
 mkdir -p /media/storage/nfs/data/portainer
+```
+
+### 2.3. Mount NFS storage at boot for clients
+
+<span style="color:red">⚠ on every node except the </span> **<span style="color:red">server</span>**<span style="color:red"> one. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+
+* create mount point folder :
+```
+mkdir /nfs
+```
+
+* edit ```rc.local``` file as follows :
+```
+sudo nano /etc/rc.local
+
+# add this line just before the exit 0 at the end of the file :
+
+mount <@ip_of_server_node>:/media/storage/nfs /nfs
+```
+
+* reboot to take effect :
+```
+sudo reboot
 ```

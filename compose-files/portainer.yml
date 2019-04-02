@@ -2,7 +2,6 @@ version: '3.7'
 
 services:
   agent:
-    restart: always
     image: portainer/agent
     environment:
       AGENT_CLUSTER_ADDR: tasks.agent
@@ -16,25 +15,29 @@ services:
         protocol: tcp
         mode: host
     networks:
-      - portainer_agent
+      - agent
     deploy:
       mode: global
       placement:
         constraints: [node.platform.os == linux]
 
   portainer:
-    restart: always
     image: portainer/portainer
     environment:
       AGENT_SECRET: portainer
+    # command: -H unix:///var/run/docker.sock
     command: -H tcp://tasks.agent:9001 --tlsskipverify
     ports:
       - "9000:9000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer:/data
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: volume
+        source: nfs
+        target: /data
     networks:
-      - portainer_agent
+      - agent
     deploy:
       mode: replicated
       replicas: 1
@@ -42,14 +45,14 @@ services:
         constraints: [node.role == manager]
 
 networks:
-  portainer_agent:
+  agent:
     driver: overlay
     attachable: true
 
 volumes:
-  portainer:
+  nfs:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=192.168.1.30,rw
+      o: addr=192.168.1.30,rw,nolock
       device: ":/media/storage/nfs/data/portainer"

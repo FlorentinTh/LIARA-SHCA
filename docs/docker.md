@@ -15,25 +15,15 @@ sudo usermod <username> -aG docker
 newgrp docker
 ```
 
-### 3.2. Install Docker Compose and Docker Machine
+### 3.2. Install Docker Compose
 
-* install required package : 
+* update possibly out of date setuptools package : 
 ```
-sudo apt-get install dirmngr --install-recommends
+sudo pip install --upgrade setuptools
 ```
-* add new sources from Hypriot : 
+* install Docker Compose through ```pip``` :
 ```
-echo "deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ jessie main" | sudo tee /etc/apt/sources.list.d/hypriot.list
-
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F
-```
-* update packages : 
-```
-sudo apt-get update
-```
-* install Docker Compose and Docker Machine :
-```
-sudo apt-get install docker-machine docker-compose
+sudo pip install docker-compose
 ```
 
 ### 3.3. Create the swarm
@@ -67,7 +57,7 @@ docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
 docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
-
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 * create an overlay network : 
 ```
 docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
@@ -106,7 +96,7 @@ sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout /media/storage/nfs/cert
 
 * run the following command to get the compose file : 
 ```
-curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/registry.yml?token=ACX0vU_gfXEYmDwApdfmQEiaHXh-9DkCks5cmVT6wA%3D%3D -o /tmp/registry.yml
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-files/registry.yml?token=ACX0vaF6aAEvyXYQLbnopYzAmBwDwP4Pks5cpoaFwA%3D%3D -o /tmp/registry.yml
 ```
 _make sure to uncomment commented line if you want to use SSL_
 
