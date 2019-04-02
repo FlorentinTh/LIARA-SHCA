@@ -5,15 +5,15 @@ Main repository of the raspberry pi cluster deployed as part of one of my Ph. D.
 
 ![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
 
+### Authors
+
+* [**Florentin Thullier**](https://github.com/FlorentinTh) - 2019
+
 ### Prerequisites
 
 Download the latest Raspbian operating system images [here](https://www.raspberrypi.org/downloads/raspbian/). Every node require the **light version**.
 
 Flash your image on the sd card with the latest version of [Etcher](https://www.balena.io/etcher/).
-
-### Authors
-
-* [**Florentin Thullier**](https://github.com/FlorentinTh) - 2019
 
 ### Documentation
 **Table of Contents**
