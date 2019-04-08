@@ -28,7 +28,7 @@ sudo pip install docker-compose
 
 ### 3.3. Create the swarm
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * initialize the swarm :
 ```
@@ -44,20 +44,20 @@ docker swarm join-token manager
 docker swarm join-token worker
 ```
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">manager1</span>** <span style="color:red">and the</span> **<span style="color:red">manager2</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager1</span>** <span style="color:red">and the</span> **<span style="color:red">manager2</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * join the swarm as a **manager** node :
 ```
 docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
 
-<span style="color:red">⚠ only for the following nodes : </span> **<span style="color:red">worker0, worker1, worker2.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only for the following nodes : </span> **<span style="color:red">worker0, worker1, worker2.</span>** <span style="color:red">See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * join the swarm as **worker** nodes :
 ```
 docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
-<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 * create an overlay network : 
 ```
 docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
@@ -88,7 +88,7 @@ http://@IP_of_any_node:9000
 
 ### 3.6. Deploy a private registry
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * create an authentication file :
 ```

@@ -37,7 +37,7 @@ sudo reboot
 
 * get the script : 
 ```
-sudo curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/scripts/zram.sh?token=ACX0veOpYgtZu3It2q6lCEWBiUc3W1tRks5cmVWhwA%3D%3D -o /usr/bin/zram.sh
+sudo curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/scripts/zram.sh?token=ACX0veOpYgtZu3It2q6lCEWBiUc3W1tRks5cmVWhwA%3D%3D -o /usr/bin/zram.sh
 ```
 * make it executable : 
 ```

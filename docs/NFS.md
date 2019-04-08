@@ -9,7 +9,7 @@ sudo apt-get install nfs-common -y
 
 ### 2.2. Create the NFS server
 
-<span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * install required dependencies :
 ```
@@ -110,7 +110,7 @@ curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-f
 
 ### 2.3. Mount NFS storage at boot for clients
 
-<span style="color:red">⚠ on every node except the </span> **<span style="color:red">server</span>**<span style="color:red"> one. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
+<span style="color:red">⚠ on every node except the </span> **<span style="color:red">server</span>**<span style="color:red"> one. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * create mount point folder :
 ```
