@@ -1,5 +1,7 @@
 ## 1. Initial Configuation
 
+<span style="color:red">⚠ must be achieved on every Raspberry Pi.</span>
+
 ### 1.1. Initialisation
 
 * access to the configuration panel by using : 

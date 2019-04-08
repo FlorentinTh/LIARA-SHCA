@@ -2,6 +2,8 @@
 
 ### 3.1. Install Docker
 
+<span style="color:red">⚠ on every Raspberry Pi.</span>
+
 * execute the installation command as follows :
 ```
 curl -sSL get.docker.com | sh
@@ -16,6 +18,8 @@ newgrp docker
 ```
 
 ### 3.2. Install Docker Compose
+
+<span style="color:red">⚠ on every Raspberry Pi.</span>
 
 * update possibly out of date setuptools package : 
 ```
@@ -58,12 +62,16 @@ docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 ```
 <span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
+
 * create an overlay network : 
 ```
 docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
 ```
 
 ### 3.4. Setup a reverse proxy
+
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
+
 * deploy the [Traefik](http://www.portainer.io/) stack : 
 ```
 docker stack deploy -c /nfs/conf/traefik.yml traefik
@@ -74,6 +82,8 @@ http://@IP_of_any_node:8080
 ```
 
 ### 3.5. Deploy a GUI to manage the swarm
+
+<span style="color:red">⚠ only on the </span> **<span style="color:red">manager0</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiCluster#setup) for more informations.</span>
 
 * deploy the [Portainer](http://www.portainer.io/) stack : 
 ```

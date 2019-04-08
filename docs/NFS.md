@@ -2,6 +2,8 @@
 
 ### 2.1. Prerequisites
 
+<span style="color:red">⚠ on every Raspberry Pi.</span>
+
 * install required dependencies 
 ```
 sudo apt-get install nfs-common -y
