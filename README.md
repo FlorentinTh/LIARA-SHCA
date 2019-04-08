@@ -37,7 +37,7 @@ Flash your image on the sd card with the latest version of [Etcher](https://www.
     - [4.1. Overclocking](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#31-overclocking)
     - [4.2. ZRAM Optimization](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#32-zram-optimization)
 
-### Docker containers
+### Custom Docker container images
 
 * [**example**]()
   > description
