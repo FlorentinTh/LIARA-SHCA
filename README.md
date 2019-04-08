@@ -1,6 +1,6 @@
 # Raspberry Pi Cluster Architecture
 
-Main repository of the raspberry pi cluster deployed as part of one of my Ph. D. thesis projects. 
+Main repository of the Raspberry Pi cluster deployed as part of one of my Ph. D. thesis projects. 
 
 
 ![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
