@@ -18,10 +18,8 @@ services:
       - agent
     deploy:
       mode: global
-      placement:
-        constraints: [node.platform.os == linux]
 
-  portainer:
+  app:
     image: portainer/portainer:latest
     environment:
       AGENT_SECRET: portainer
@@ -34,15 +32,25 @@ services:
         source: /var/run/docker.sock
         target: /var/run/docker.sock
       - type: volume
-        source: nfs
+        source: data
         target: /data
     networks:
       - agent
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=portainer"
+      - "traefik.docker.network=agent"
+      - "traefik.port=9000"
     deploy:
       mode: replicated
       replicas: 1
       placement:
         constraints: [node.role == manager]
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
 
 networks:
   agent:
@@ -50,7 +58,7 @@ networks:
     attachable: true
 
 volumes:
-  nfs:
+  data:
     driver: local
     driver_opts:
       type: nfs

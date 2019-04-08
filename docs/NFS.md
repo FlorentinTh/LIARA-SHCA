@@ -83,10 +83,29 @@ sudo exportfs -ra
 
 * create required folders used in the rest of this configuration documentation : 
 ```
-mkdir -p /media/storage/nfs/registry/images
-mkdir -p /media/storage/nfs/registry/auth
-mkdir -p /media/storage/nfs/certs
+mkdir -p /media/storage/nfs/conf
 mkdir -p /media/storage/nfs/data/portainer
+mkdir -p /media/storage/nfs/data/traefik
+mkdir -p /media/storage/nfs/registry/auth
+mkdir -p /media/storage/nfs/registry/images
+```
+
+* create required files used in the rest of this configuration documentation :
+```
+# Get the Traefik configuration file :
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/conf/traefik/traefik.toml?token=ACX0vSyLB6BgAFvN75b3eMxeM87All5aks5ctJtTwA%3D%3D -o /media/storage/nfs/data/traefik/traefik.toml
+
+# Generate a password to acces the dashboard of trafik. The output needs to be placed on line 16 of the traefil.toml file :
+htpasswd -bn <username> <password>
+
+# Get the Portainer deployment file :
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-files/portainer.yml?token=ACX0vZWRHs8HvqqU0T67YYj41FA6MsGEks5ctJzuwA%3D%3D -o /media/storage/nfs/conf/portainer.yml
+
+# Get the Registry deployment file :
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-files/registry.yml?token=ACX0vYM4faKBGHVzb0DAMOnCHPs4crNrks5ctJ0KwA%3D%3D -o /media/storage/nfs/conf/registry.yml
+
+# Get the Traefik deployment file :
+curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-files/traefik.yml?token=ACX0vQIm-X21O7FuIzKiryTPChZ0ihr8ks5ctJ0gwA%3D%3D -o /media/storage/nfs/conf/traefik.yml
 ```
 
 ### 2.3. Mount NFS storage at boot for clients

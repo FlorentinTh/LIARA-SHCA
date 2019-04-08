@@ -63,15 +63,21 @@ docker swarm join --token <generated_token> <@ip_of_leader_master_node>:2377
 docker network create -d overlay --attachable --subnet 10.1.9.0/24 multi-host-net
 ```
 
-### 3.4. Deploy a GUI to manage the swarm
+### 3.4. Setup a reverse proxy
+* deploy the [Traefik](http://www.portainer.io/) stack : 
+```
+docker stack deploy -c /nfs/conf/traefik.yml traefik
+```
+* access the dashboard through a browser : 
+```
+http://@IP_of_any_node:8080
+```
 
-* run the following command to get the [portainer](http://www.portainer.io/) compose file :
+### 3.5. Deploy a GUI to manage the swarm
+
+* deploy the [Portainer](http://www.portainer.io/) stack : 
 ```
- curl -L https://raw.githubusercontent.com/FlorentinTh/PiSwarm/master/compose-files/portainer.yml?token=ACX0vbcWxfkK06CYIZqVEnrnnygQUnbwks5cmoVIwA%3D%3D -o /tmp/portainer.yml
-```
-* deploy the stack : 
-```
-docker stack deploy -c /tmp/portainer.yml portainer
+docker stack deploy -c /nfs/conf/portainer.yml portainer
 ```
 It will automatically deploy a single instance of the Portainer Server, and deploy the Portainer Agent as a global service on every node in the cluster.
 
@@ -80,7 +86,7 @@ It will automatically deploy a single instance of the Portainer Server, and depl
 http://@IP_of_any_node:9000
 ```
 
-### 3.5. Deploy a private registry
+### 3.6. Deploy a private registry
 
 <span style="color:red">⚠ only on the </span> **<span style="color:red">server</span>**<span style="color:red"> node. See [setup](https://github.com/FlorentinTh/PiSwarm#setup) for more informations.</span>
 
@@ -94,13 +100,8 @@ sudo htpasswd -Bbn <username> <password> > /media/storage/nfs/registry/auth/htpa
 sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout /media/storage/nfs/certs/domain.key -x509 -days 365 -out /media/storage/nfs/certs/domain.crt
 ```
 
-* run the following command to get the compose file : 
-```
-curl -L https://raw.githubusercontent.com/FlorentinTh/PiCluster/master/compose-files/registry.yml?token=ACX0vaF6aAEvyXYQLbnopYzAmBwDwP4Pks5cpoaFwA%3D%3D -o /tmp/registry.yml
-```
-_make sure to uncomment commented line if you want to use SSL_
-
 * build and start the container :
+_make sure to uncomment commented line beforehand if you want to use SSL._
 ```
-docker-compose -f "/tmp/registry.yml" up -d --build
+docker-compose -f "/media/storage/nfs/conf/registry.yml" up -d --build
 ```
