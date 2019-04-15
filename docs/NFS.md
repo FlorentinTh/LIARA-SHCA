@@ -73,7 +73,7 @@ RPCNFSDCOUNT=8
 RPCNFSDCOUNT="8 --no-nfs-version 4"
 
 # restart the service
-systemctl restart nfs-kernel-server
+sudo systemctl restart nfs-kernel-server
 ```
 
 * start the NFS server :
@@ -131,4 +131,34 @@ mount <@ip_of_server_node>:/media/storage/nfs /nfs
 * reboot to take effect :
 ```
 sudo reboot
+```
+
+### TEST
+
+```
+sudo nano /etc/exports
+/media/storage/nfs  192.168.1.0/24(rw,all_squash,nohide,async,no_subtree_check,insecure)
+
+sudo exportfs -ra
+sudo systemctl enable rpcbind
+sudo systemctl enable nfs-kernel-server
+sudo rm /lib/systemd/system/nfs-common.service
+sudo systemctl daemon-reload
+sudo systemctl enable nfs-common
+sudo systemctl start rpcbind
+sudo systemctl start nfs-kernel-server
+sudo systemctl start nfs-common
+
+sudo mkdir /nfs
+sudo chown admin:admin /nfs
+
+sudo nano /etc/idmapd.conf
+[Mapping]
+Nobody-User = admin
+Nobody-Group = admin
+
+sudo mount 192.168.1.30:/media/storage/nfs /nfs
+
+sudo nano /etc/fstab
+192.168.1.30:/media/storage/nfs /nfs nfs rw 0 0
 ```
