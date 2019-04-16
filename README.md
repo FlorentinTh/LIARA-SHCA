@@ -1,8 +1,8 @@
-# Raspberry Pi Cluster Architecture _(DEPRECATED)_
+# PiCluster
 
 [![GitHub release](https://img.shields.io/github/release/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/releases) [![GitHub](https://img.shields.io/github/license/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/blob/master/LICENSE)
 
-Main repository of the Raspberry Pi cluster deployed as part of one of my Ph. D. thesis projects. 
+This repository is the main entry point of resources for the Raspberry Pi cluster architecture for smart homes that was deployed as part of one of my Ph. D. thesis projects.
 
 
 ![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
