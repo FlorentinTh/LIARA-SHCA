@@ -15,7 +15,7 @@ This repository is the main entry point of resources for the Raspberry Pi cluste
 
 Download the latest Raspbian operating system images [here](https://www.raspberrypi.org/downloads/raspbian/). Every node require the **light version**.
 
-Flash your image on the sd card with the latest version of [Etcher](https://www.balena.io/etcher/).
+Flash your image on the SD card with the latest version of [Etcher](https://www.balena.io/etcher/).
 
 ### Documentation
 **Table of Contents**
@@ -25,6 +25,7 @@ Flash your image on the sd card with the latest version of [Etcher](https://www.
    - [1.3. Disabling IPv6](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#13-disabling-ipv6)
    - [1.4. New user creation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#13-create-de-new-user) 
    - [1.5. Wi-Fi configuration](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#2-nfs-server)
+- [2. NFS Server]()
   - [2.1. Prerequisites](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#21-prerequisites)
   - [2.2. Setup the NFS server](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#22-create-the-nfs-server)
   - [2.3. Mount NFS storage at boot for clients](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#22-create-the-nfs-server)
@@ -39,12 +40,10 @@ Flash your image on the sd card with the latest version of [Etcher](https://www.
     - [4.1. Overclocking](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#31-overclocking)
     - [4.2. ZRAM Optimization](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#32-zram-optimization)
 
-### Custom Docker container images
+### Related Repositories
 
-* [**example**]()
-  > description
-* [**example**]()
-  > description
+* [**PiCluster-GUI**](https://github.com/FlorentinTh/PiCluster-GUI)
+  > Repository of the GUI to interact with the Raspberry Pi cluster.
 
 ### License
 
