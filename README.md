@@ -4,7 +4,7 @@
 
 This repository is the main entry point of resources for the Raspberry Pi cluster architecture for smart homes that was deployed as part of one of my Ph. D. thesis projects.
 
-![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
+![network-scheme.jpg](docs/img/network-scheme.jpg "network-scheme")
 
 ## Authors
 
