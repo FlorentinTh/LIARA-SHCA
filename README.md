@@ -4,47 +4,56 @@
 
 This repository is the main entry point of resources for the Raspberry Pi cluster architecture for smart homes that was deployed as part of one of my Ph. D. thesis projects.
 
-
 ![network-scheme.jpg](/assets/images/network-scheme.jpg "network-scheme")
 
-### Authors
+## Authors
 
 * [**Florentin Thullier**](https://github.com/FlorentinTh) - 2019
 
-### Prerequisites
+## Prerequisites
 
-Download the latest Raspbian operating system images [here](https://www.raspberrypi.org/downloads/raspbian/). Every node require the **light version**.
+Download the latest FlOS operating system image [here](https://github.com/FlorentinTh/FlOS/releases).
 
-Flash your image on the SD card with the latest version of [Etcher](https://www.balena.io/etcher/).
+Flash your image on the SD card with the latest version of [Etcher](https://www.balena.io/etcher/) with the following parameters :
 
-### Documentation
-**Table of Contents**
-- [1. Initial configuation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#11-initialisation)
-   - [1.1. Initialisation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#11-initialisation) 
-   - [1.2. Static IP address configuration](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#12-setup-static-ip-addresses)
-   - [1.3. Disabling IPv6](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#13-disabling-ipv6)
-   - [1.4. New user creation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/initial-config.md#13-create-de-new-user) 
-   - [1.5. Wi-Fi configuration](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#2-nfs-server)
-- [2. NFS Server]()
-  - [2.1. Prerequisites](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#21-prerequisites)
-  - [2.2. Setup the NFS server](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#22-create-the-nfs-server)
-  - [2.3. Mount NFS storage at boot for clients](https://github.com/FlorentinTh/PiCluster/blob/master/docs/NFS.md#22-create-the-nfs-server)
-- [3. Docker](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#2-docker)
-   - [3.1. Docker Installation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#21-install-docker)
-   - [3.2. Docker Compose](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#22-install-docker-compose)
-   - [3.3. Swarm creation](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#23-create-the-swarm)
-   - [3.4. Reverse Proxy](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#34-setup-a-reverse-proxy)
-   - [3.5. GUI manager](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#24-deploy-a-gui-to-manage-the-swarm)
-   - [3.6. Private registry](https://github.com/FlorentinTh/PiCluster/blob/master/docs/docker.md#25-deploy-a-private-registry)
-- [4. Optimization](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#3-optimization)
-    - [4.1. Overclocking](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#31-overclocking)
-    - [4.2. ZRAM Optimization](https://github.com/FlorentinTh/PiCluster/blob/master/docs/optimization.md#32-zram-optimization)
+![Etcher Settings](docs/img/etcher-settings.png "Etcher Settings")
 
-### Related Repositories
+## Documentation
+
+### Table of Contents
+
+* [1. Cluster](docs/00-cluster.md)
+  * [1.1. Create the Cluster](docs/00-cluster.md#1-create-the-cluster)
+  * [1.2. Reverse Proxy](docs/00-cluster.md#2-reverse-proxy)
+  * [1.3. Cluster Management GUI](docs/00-cluster.md#3-cluster-management-gUI)
+  * [1.4. Private Registry](docs/00-cluster.md#4-private-registry)
+  * [1.5. Versioning](docs/00-cluster.md#5-versioning)
+* [2. Network File System](docs/10-nfs.md)
+  * [2.1. Prerequisites](docs/10-nfs.md#1-prerequisites)
+  * [2.2. NFS Server](docs/10-nfs.md#2-nfs-server)
+    * [2.2.1. Initialization](docs/10-nfs.md#2.1-initialization)
+    * [2.2.2. Creation & Configuration](docs/10-nfs.md#2.2-creation-&-configuration)
+  * [2.3. NFS Clients](docs/10-nfs.md#3-nfs-clients)
+
+### Annexes
+
+* [1. Annex A. - Certificates](docs/80-certificates.md)
+* [2. Annex B. - Disk Management](docs/90-disk-management.md)
+
+## Related Repositories
+
+* [**FlOS**](https://github.com/FlorentinTh/FlOS)
+  > Repository of the operating system installed on every Raspberry Pi of the cluster.
 
 * [**PiCluster-GUI**](https://github.com/FlorentinTh/PiCluster-GUI)
   > Repository of the GUI to interact with the Raspberry Pi cluster.
 
-### License
+* [**PiCluster-Auth**](https://github.com/FlorentinTh/PiCluster-Auth)
+  > Repository of an authentication module employed in the cluster.
 
-This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details
+* [**PiCluster-FeatureExtractor**](https://github.com/FlorentinTh/PiCluster-FeatureExtractor)
+  > Repository of a feature extractor module employed in the cluster.
+
+## License
+
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details.

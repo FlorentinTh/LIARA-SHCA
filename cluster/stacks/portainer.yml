@@ -2,13 +2,14 @@ version: '3.7'
 
 services:
   agent:
-    image: portainer/agent:latest
+    image: portainer/agent:1.3.0
     environment:
       AGENT_CLUSTER_ADDR: tasks.agent
       AGENT_SECRET: portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /etc/localtime:/etc/localtime
     ports:
       - target: 9001
         published: 9001
@@ -18,29 +19,27 @@ services:
       - agent
     deploy:
       mode: global
+      labels:
+        - "traefik.enable=false"
 
-  app:
-    image: portainer/portainer:latest
+  gui:
+    image: portainer/portainer:1.21.0
     environment:
       AGENT_SECRET: portainer
-    # command: -H unix:///var/run/docker.sock
     command: -H tcp://tasks.agent:9001 --tlsskipverify
     ports:
-      - "9000:9000"
+      - target: 9000
+        published: 9000
+        mode: ingress
     volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime
       - type: volume
         source: data
         target: /data
     networks:
       - agent
-    labels:
-      - "traefik.enable=true"
-      - "traefik.backend=portainer"
-      - "traefik.docker.network=agent"
-      - "traefik.port=9000"
+      - proxy
     deploy:
       mode: replicated
       replicas: 1
@@ -51,11 +50,20 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+      labels:
+        - "traefik.docker.network=traefik_proxy"
+        - "traefik.backend=portainer"
+        - "traefik.frontend.rule=PathPrefixStrip:/portainer/"
+        - "traefik.port=9000"
+        - "traefik.enable=true"
 
 networks:
   agent:
     driver: overlay
     attachable: true
+  proxy:
+    external: true
+    name: traefik_proxy
 
 volumes:
   data:
@@ -63,4 +71,4 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=192.168.1.30,rw,nolock
-      device: ":/media/storage/nfs/data/portainer"
+      device: ":/mnt/nfs/data/portainer"
