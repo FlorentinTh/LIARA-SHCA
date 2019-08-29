@@ -1,0 +1,66 @@
+version: '3.7'
+
+services:
+  registry:
+    image: registry:2.7
+    ports:
+      - 5000:5000
+    environment:
+      - REGISTRY_STORAGE_DELETE_ENABLED=true
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/run/secrets/server.crt
+      - REGISTRY_HTTP_TLS_KEY=/run/secrets/server.key
+      - REGISTRY_AUTH=htpasswd
+      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/.htpasswd
+      - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+    secrets:
+      - server.crt
+      - server.key
+      - source: registry-htpasswd
+        target: /auth/.htpasswd
+    networks:
+      - registry-net
+    volumes:
+      - type: volume
+        source: data
+        target: /var/lib/registry
+    deploy:
+      mode: replicated
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    logging:
+      driver: json-file
+      options:
+        max-size: 50000k
+        max-file: 1
+
+secrets:
+  server.crt:
+    file: ../secrets/.certs/server.crt
+    name: server.crt
+  server.key:
+    file: ../secrets/.certs/server.key
+    name: server.key
+  registry-htpasswd:
+    file: ../secrets/registry/.htpasswd
+    name: registry-htpasswd
+
+networks:
+  registry-net:
+    driver: overlay
+    name: registry-net
+
+volumes:
+  data:
+    driver: local
+    name: registry-data
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,nolock
+      device: :/mnt/nfs/data/registry

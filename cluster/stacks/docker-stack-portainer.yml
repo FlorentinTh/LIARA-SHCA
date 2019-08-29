@@ -1,0 +1,78 @@
+version: '3.7'
+
+services:
+  agent:
+    image: portainer/agent:1.4.0
+    env_file:
+      - ../secrets/portainer/portainer-secret.env
+    environment:
+      - AGENT_CLUSTER_ADDR=tasks.agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - portainer-agent-net
+    deploy:
+      mode: global
+      labels:
+        - traefik.enable=false
+    logging:
+      driver: json-file
+      options:
+        max-size: 50000k
+        max-file: 1
+
+  dashboard:
+    image: portainer/portainer:1.22.0
+    env_file:
+      - ../secrets/portainer/portainer-secret.env
+    command: -H tcp://tasks.agent:9001 --tlsskipverify
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - type: volume
+        source: data
+        target: /data
+    networks:
+      - portainer-agent-net
+      - proxy-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      labels:
+        - traefik.docker.network=proxy-net
+        - traefik.enable=true
+        - traefik.port=9000
+        - traefik.backend=portainer
+        - traefik.frontend=portainer
+        - traefik.frontend.rule=PathPrefixStrip:/portainer/
+        - traefik.frontend.headers.SSLRedirect=true
+        - traefik.frontend.entryPoints=http,https
+    logging:
+      driver: json-file
+      options:
+        max-size: 50000k
+        max-file: 1
+
+networks:
+  portainer-agent-net:
+    driver: overlay
+    name: portainer-agent-net
+  proxy-net:
+    external: true
+
+volumes:
+  data:
+    driver: local
+    name: portainer-data
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,nolock
+      device: :/mnt/nfs/data/portainer
