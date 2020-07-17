@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/releases) [![GitHub](https://img.shields.io/github/license/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/blob/master/LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/FlorentinTh/PiCluster?style=flat-square)](https://github.com/FlorentinTh/PiCluster/commits/master)
 
-This repository is the main entry point of resources for the Raspberry Pi cluster architecture for smart homes that was deployed as part of one of my Ph. D. thesis projects.
+This repository is the main entry point of resources for the PiCluster project for smart homes that was a part of one of my Ph. D. thesis.
 
 ![cluster-network.png](docs/img/cluster-network.png "Cluster Network")
 
@@ -37,7 +37,7 @@ Flash your image on the SD card with the latest version of [Etcher](https://www.
   * [2.5. Private Registry](docs/00-cluster.md#4-private-registry)
 
 * [3. Databases](docs/20-databases.md)
-  * [3.1. SQL - MariaDB](docs/20-databases.md#1-configure-mariadb-multi-master-replication)
+  * **(deprecated)** [3.1. SQL - MariaDB](docs/20-databases.md#1-configure-mariadb-multi-master-replication)
   * [3.2. NoSQL - MongoDB](docs/20-databases.md#2-configure-mongodb-replica-set)
 
 ### Annexes
@@ -51,13 +51,22 @@ Flash your image on the SD card with the latest version of [Etcher](https://www.
   > Repository of the operating system installed on every Raspberry Pi of the cluster.
 
 * [**PiCluster-GUI**](https://github.com/FlorentinTh/PiCluster-GUI)
-  > Repository of the GUI to interact with the Raspberry Pi cluster.
+  > Repository of the GUI for the PiCluster project.
 
-* [**PiCluster-Auth**](https://github.com/FlorentinTh/PiCluster-Auth)
-  > Repository of an authentication module employed in the cluster.
+* [**PiCluster-API**](https://github.com/FlorentinTh/PiCluster-API)
+  > Repository of the API for the PiCluster project.
+
+* [**PiCluster-Windowing**](https://github.com/FlorentinTh/PiCluster-Windowing)
+  > Repository of the windowing module for the PiCluster project.
 
 * [**PiCluster-FeatureExtractor**](https://github.com/FlorentinTh/PiCluster-FeatureExtractor)
-  > Repository of a feature extractor module employed in the cluster.
+  > Repository of the feature extractor module for the PiCluster project.
+
+* [**PiCluster-Datasets**](https://github.com/FlorentinTh/PiCluster-Datasets)
+  > Repository containing several datasets for the PiCluster project.
+
+* [**PiCluster-Misc**](https://github.com/FlorentinTh/PiCluster-Misc)
+  > Repository of miscellaneous files and resources for the PiCluster project.
 
 ## License
 
