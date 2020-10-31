@@ -1,8 +1,8 @@
-# PiCluster
+# LIARA-SHCA
 
-[![GitHub release](https://img.shields.io/github/release/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/releases) [![GitHub](https://img.shields.io/github/license/FlorentinTh/PiCluster.svg?style=flat-square)](https://github.com/FlorentinTh/PiCluster/blob/master/LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/FlorentinTh/PiCluster?style=flat-square)](https://github.com/FlorentinTh/PiCluster/commits/master)
+[![GitHub release](https://img.shields.io/github/release/FlorentinTh/LIARA-SHCA.svg?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/releases) [![GitHub](https://img.shields.io/github/license/FlorentinTh/LIARA-SHCA.svg?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/blob/master/LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/FlorentinTh/LIARA-SHCA?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/commits/master)
 
-This repository is the main entry point of resources for the PiCluster project for smart homes that was a part of one of my Ph. D. thesis.
+Main repository of the LIARA Smart Home Cluster Architecture (SHCA).
 
 ![cluster-network.png](docs/img/cluster-network.png "Cluster Network")
 
@@ -48,25 +48,12 @@ Flash your image on the SD card with the latest version of [Etcher](https://www.
 ## Related Repositories
 
 * [**FlOS**](https://github.com/FlorentinTh/FlOS)
-  > Repository of the operating system installed on every Raspberry Pi of the cluster.
+  > Repository of the operating system installed on every Raspberry Pi.
 
-* [**PiCluster-GUI**](https://github.com/FlorentinTh/PiCluster-GUI)
-  > Repository of the GUI for the PiCluster project.
+## Related Projects
 
-* [**PiCluster-API**](https://github.com/FlorentinTh/PiCluster-API)
-  > Repository of the API for the PiCluster project.
-
-* [**PiCluster-Windowing**](https://github.com/FlorentinTh/PiCluster-Windowing)
-  > Repository of the windowing module for the PiCluster project.
-
-* [**PiCluster-FeatureExtractor**](https://github.com/FlorentinTh/PiCluster-FeatureExtractor)
-  > Repository of the feature extractor module for the PiCluster project.
-
-* [**PiCluster-Datasets**](https://github.com/FlorentinTh/PiCluster-Datasets)
-  > Repository containing several datasets for the PiCluster project.
-
-* [**PiCluster-Misc**](https://github.com/FlorentinTh/PiCluster-Misc)
-  > Repository of miscellaneous files and resources for the PiCluster project.
+* [**LE2ML**](https://github.com/FlorentinTh/LE2ML)
+  > Repository of the LE2ML workbench.
 
 ## License
 
