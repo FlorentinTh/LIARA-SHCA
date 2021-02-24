@@ -9,7 +9,7 @@
 * Install required dependencies :
 
 ```bash
-$ sudo apt-get install -y nfs-common
+$> sudo apt-get install -y nfs-common
 ```
 
 ## 2. NFS Server
@@ -21,24 +21,24 @@ $ sudo apt-get install -y nfs-common
 * Install required dependencies :
 
 ```bash
-$ sudo apt-get install -y nfs-kernel-server rpcbind
+$> sudo apt-get install -y nfs-kernel-server rpcbind
 ```
 
 * Prepare the required NFS directory :
 
 ```bash
-$ sudo mkdir -p /mnt/nfs
-$ sudo mount /dev/sda1 /mnt/nfs
-$ sudo chown -R <username>:<username> /mnt/nfs
-$ sudo chmod 755 /mnt/nfs
-$ sudo find /mnt/nfs/* -type d -exec chmod 755 {} \;
-$ sudo find /mnt/nfs/* -type f -exec chmod 644 {} \;
+$> sudo mkdir -p /mnt/nfs
+$> sudo mount /dev/sda1 /mnt/nfs
+$> sudo chown -R <username>:<username> /mnt/nfs
+$> sudo chmod 755 /mnt/nfs
+$> sudo find /mnt/nfs/* -type d -exec chmod 755 {} \;
+$> sudo find /mnt/nfs/* -type f -exec chmod 644 {} \;
 ```
 
 * Create required folders used in the rest of this configuration documentation :
 
 ```bash
-$ mkdir -p /mnt/nfs/conf \
+$> mkdir -p /mnt/nfs/conf \
     /mnt/nfs/data/portainer \
     /mnt/nfs/data/traefik \
     /mnt/nfs/registry/auth \
@@ -54,16 +54,16 @@ $ mkdir -p /mnt/nfs/conf \
 * Mount the partition at boot :
 
 ```bash
-$ sudo nano /etc/fstab
+$> sudo nano /etc/fstab
 
 # add this line to the end of the file :
 /dev/sda1 /mnt/nfs ext4 defaults,noatime 0 0
 
 # FlOS :
-$ sudo nano /boot/firmware/cmdline.txt
+$> sudo nano /boot/firmware/cmdline.txt
 
 # Raspbian :
-$ sudo nano /boot/cmdline.txt
+$> sudo nano /boot/cmdline.txt
 
 # append this after the rootwait parameter :
 rootdelay=10
@@ -74,13 +74,13 @@ rootdelay=10
 * Identify the user's uid and gid :
 
 ```bash
-$ id <username>
+$> id <username>
 ```
 
 * Configure the NFS server :
 
 ```bash
-$ sudo nano /etc/exports
+$> sudo nano /etc/exports
 
 # add this line at the end of the file :
 /mnt/nfs <gateway_@IP>/24(rw,all_squash,nohide,insecure,async,no_subtree_check,anonuid=<user_id>,anongid=<user_gid>)
@@ -89,15 +89,15 @@ $ sudo nano /etc/exports
 * Export the config, enable the services on boot and start NFS:
 
 ```bash
-$ sudo exportfs -ra
-$ sudo systemctl enable rpcbind
-$ sudo systemctl enable nfs-kernel-server
-$ sudo rm /lib/systemd/system/nfs-common.service
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable nfs-common
-$ sudo systemctl start rpcbind
-$ sudo systemctl start nfs-kernel-server
-$ sudo systemctl start nfs-common
+$> sudo exportfs -ra
+$> sudo systemctl enable rpcbind
+$> sudo systemctl enable nfs-kernel-server
+$> sudo rm /lib/systemd/system/nfs-common.service
+$> sudo systemctl daemon-reload
+$> sudo systemctl enable nfs-common
+$> sudo systemctl start rpcbind
+$> sudo systemctl start nfs-kernel-server
+$> sudo systemctl start nfs-common
 ```
 
 > **The following step is optional :**
@@ -105,7 +105,7 @@ $ sudo systemctl start nfs-common
 * Disable NFSv4 :
 
 ```bash
-$ sudo nano /etc/default/nfs-kernel-server
+$> sudo nano /etc/default/nfs-kernel-server
 
 # replace the second line :
 RPCNFSDCOUNT=8
@@ -113,7 +113,7 @@ RPCNFSDCOUNT=8
 RPCNFSDCOUNT="8 --no-nfs-version 4"
 
 # restart the service
-$ sudo systemctl restart nfs-kernel-server
+$> sudo systemctl restart nfs-kernel-server
 ```
 
 ## 3. NFS Clients
@@ -125,14 +125,14 @@ $ sudo systemctl restart nfs-kernel-server
 * Prepare the NFS mounting point folder :
 
 ```bash
-$ sudo mkdir -p /mnt/nfs
-$ sudo chown <username>:<username> /mnt/nfs
+$> sudo mkdir -p /mnt/nfs
+$> sudo chown <username>:<username> /mnt/nfs
 ```
 
 * Edit the mapping user :
 
 ```bash
-$ sudo nano /etc/idmapd.conf
+$> sudo nano /etc/idmapd.conf
 
 # replace :
 [Mapping]
@@ -150,9 +150,9 @@ Nobody-Group = <username>
 * Mount the NFS share to the mountpoint and enable mounting at boot :
 
 ```bash
-$ sudo mount <NFS_server_@IP>:/mnt/nfs /mnt/nfs
+$> sudo mount <NFS_server_@IP>:/mnt/nfs /mnt/nfs
 
-$ sudo nano /etc/fstab
+$> sudo nano /etc/fstab
 
 # add this line at the end of the file :
 <NFS_server_@IP>:/nfs /mnt/nfs nfs rw 0 0

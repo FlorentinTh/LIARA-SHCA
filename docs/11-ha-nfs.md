@@ -2,7 +2,7 @@
 
 > If needed, it is possible to refer to [Annex B.](90-disk-management.md) in order to format an external drive.
 
-![nfs-server.png](./img/nfs-server.png "NFS Server")
+![nfs-server.png](./img/ha-nfs.jpg "NFS Server")
 
 ## 1. Prerequisites
 
@@ -11,7 +11,7 @@
 _On every node of the NFS file server._
 
 ```bash
-$ sudo apt-get install -y ntp ntpdate
+$> sudo apt-get install -y ntp ntpdate
 ```
 
 ## 2. Install and Configure DRBD
@@ -21,7 +21,7 @@ $ sudo apt-get install -y ntp ntpdate
 _On every node of the NFS file server._
 
 ```bash
-$ sudo apt-get install -y drbd-utils
+$> sudo apt-get install -y drbd-utils
 ```
 
 - Edit global configuration as follows :
@@ -29,7 +29,7 @@ $ sudo apt-get install -y drbd-utils
 _On every node of the NFS file server._
 
 ```bash
-$ sudo nano /etc/drbd.d/global_common.conf
+$> sudo nano /etc/drbd.d/global_common.conf
 
 # insert this configuration :
 global {
@@ -77,7 +77,7 @@ common {
 _On every node of the NFS file server._
 
 ```bash
-$ sudo nano /etc/drbd.d/r0.res
+$> sudo nano /etc/drbd.d/r0.res
 
 # insert thi configuration :
 resource r0 {
@@ -106,7 +106,7 @@ resource r0 {
 _On every node of the NFS file server._
 
 ```bash
-$ sudo drbdadm create-md r0
+$> sudo drbdadm create-md r0
 ```
 
 - Enable the ressource :
@@ -114,7 +114,7 @@ $ sudo drbdadm create-md r0
 _On every node of the NFS file server._
 
 ```bash
-$ sudo drbdadm up r0
+$> sudo drbdadm up r0
 ```
 
 - Start ```DRBD``` :
@@ -122,7 +122,7 @@ $ sudo drbdadm up r0
 _On every node of the NFS file server._
 
 ```bash
-$ sudo /etc/init.d/drbd start
+$> sudo /etc/init.d/drbd start
 ```
 
 - Initialise a primary ```DRBD``` connection :
@@ -130,7 +130,7 @@ $ sudo /etc/init.d/drbd start
 _Only on the first node of the NFS file server._
 
 ```bash
-$ sudo drbdadm -- --overwrite-data-of-peer primary r0
+$> sudo drbdadm -- --overwrite-data-of-peer primary r0
 ```
 
 - Start the synchronization :
@@ -138,8 +138,8 @@ $ sudo drbdadm -- --overwrite-data-of-peer primary r0
 _Only on the first node of the NFS file server._
 
 ```bash
-$ sudo drbdadm disconnect r0
-$ sudo drbdadm connect r0
+$> sudo drbdadm disconnect r0
+$> sudo drbdadm connect r0
 ```
 
 > The status of the synchronization can be monitored through the following command : ```cat /proc/drbd```. The output should look as follows : 
@@ -162,7 +162,7 @@ $ sudo drbdadm connect r0
 _On every node of the NFS file server._
 
 ```bash
-$ sudo apt-get install -y nfs-kernel-server
+$> sudo apt-get install -y nfs-kernel-server
 ```
 
 - Remove the system boot up links :
@@ -170,8 +170,8 @@ $ sudo apt-get install -y nfs-kernel-server
 _On every node of the NFS file server._
 
 ```bash
-$ sudo update-rc.d -f nfs-kernel-server remove
-$ sudo update-rc.d -f nfs-common remove
+$> sudo update-rc.d -f nfs-kernel-server remove
+$> sudo update-rc.d -f nfs-common remove
 ```
 
 - Create the NFS share folders structure :
@@ -179,7 +179,7 @@ $ sudo update-rc.d -f nfs-common remove
 _On every node of the NFS file server._
 
 ```bash
-$ sudo mkdir -p /mnt/nfs
+$> sudo mkdir -p /mnt/nfs
 ```
 
 - Edit sharing configuration as follows :
@@ -187,7 +187,7 @@ $ sudo mkdir -p /mnt/nfs
 _On every node of the NFS file server._
 
 ```bash
-$ sudo nano /etc/exports
+$> sudo nano /etc/exports
 
 # add thi line at the end of the file :
 /mnt/nfs 192.168.1.0/255.255.255.0(rw,no_root_squash,no_all_squash,sync)
@@ -200,7 +200,7 @@ $ sudo nano /etc/exports
 _On every node of the NFS file server._
 
 ```bash
-$ sudo apt-get install -y heartbeat
+$> sudo apt-get install -y heartbeat
 ```
 
 - Configure ```Heartbeat``` as follows :
@@ -208,7 +208,7 @@ $ sudo apt-get install -y heartbeat
 _On every node of the NFS file server._
 
 ```bash
-$ sudo nano /etc/heartbeat/ha.cf
+$> sudo nano /etc/heartbeat/ha.cf
 
 # Insert the following configuration :
 logfacility     local0
@@ -218,26 +218,26 @@ bcast   eth0
 auto_failback off
 node <hostname_of_first_node> <hostname_of_second_node>
 
-$ sudo nano /etc/heartbeat/haresources
+$> sudo nano /etc/heartbeat/haresources
 
 # Insert the following configuration :
 <hostname_of_first_node> IPaddr::<your_virtual_ip>/<mask>/<interface> drbddisk::r0
 Filesystem::/dev/drbd0::/mnt/nfs::ext4 nfs-kernel-server
 
-$ sudo nano /etc/heartbeat/authkeys
+$> sudo nano /etc/heartbeat/authkeys
 
 # Insert the following configuration :
 auth 1
 1 sha1 <your_secret>
 
-$ sudo chmod 600 /etc/heartbeat/authkeys
+$> sudo chmod 600 /etc/heartbeat/authkeys
 ```
 
 - Start the services on every nodes as follows :
 
 ```bash
-$ sudo /etc/init.d/drbd start
-$ sudo /etc/init.d/heartbeat start
+$> sudo /etc/init.d/drbd start
+$> sudo /etc/init.d/heartbeat start
 ```
 
 ## 5. Configure NFS information mirroring
@@ -245,20 +245,20 @@ $ sudo /etc/init.d/heartbeat start
 - On the primary NFS server :
 
 ```bash
-$ sudo mv /var/lib/nfs/ /mnt/nfs/.share
-$ sudo ln -s /mnt/nfs/.share /var/lib/nfs
-$ sudo /etc/init.d/heartbeat stop
+$> sudo mv /var/lib/nfs/ /mnt/nfs/.share
+$> sudo ln -s /mnt/nfs/.share /var/lib/nfs
+$> sudo /etc/init.d/heartbeat stop
 ```
 
 - On the secondary NFS server _(that now became the new primary server)_ :
 
 ```bash
-$ sudo rm -rf /var/lib/nfs/
-$ sudo ln -s /mnt/nfs/.share /var/lib/nfs
+$> sudo rm -rf /var/lib/nfs/
+$> sudo ln -s /mnt/nfs/.share /var/lib/nfs
 ```
 
 - Finally, restart ```heartbeat``` on the old primary NFS server :
 
 ```bash
-$ sudo /etc/init.d/heartbeat start
+$> sudo /etc/init.d/heartbeat start
 ```

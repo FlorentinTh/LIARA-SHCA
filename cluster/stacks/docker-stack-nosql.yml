@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   mongo-srv0:
@@ -56,46 +56,6 @@ services:
         ipv4_address: 172.20.0.22
     ports:
       - 27019:27017
-    secrets:
-      - mongo-root-username
-      - mongo-root-passwd
-    command: mongod --auth --bind_ip_all --replSet=rs0 --keyFile /keys/mongo-keyfile
-
-  mongo-srv3:
-    hostname: mongo-srv3
-    build:
-      context: .
-      dockerfile: mongo.Dockerfile
-    image: mongo-key:latest
-    # image: mongo:4.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo-root-username
-      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-root-passwd
-    networks:
-      mongo-net:
-        ipv4_address: 172.20.0.23
-    ports:
-      - 27020:27017
-    secrets:
-      - mongo-root-username
-      - mongo-root-passwd
-    command: mongod --auth --bind_ip_all --replSet=rs0 --keyFile /keys/mongo-keyfile
-
-  mongo-srv4:
-    hostname: mongo-srv4
-    build:
-      context: .
-      dockerfile: mongo.Dockerfile
-    image: mongo-key:latest
-    # image: mongo:4.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo-root-username
-      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-root-passwd
-    networks:
-      mongo-net:
-        ipv4_address: 172.20.0.24
-    ports:
-      - 27021:27017
     secrets:
       - mongo-root-username
       - mongo-root-passwd

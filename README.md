@@ -4,7 +4,7 @@
 
 Main repository of the LIARA Smart Home Cluster Architecture (SHCA).
 
-![cluster-network.png](docs/img/cluster-network.png "Cluster Network")
+![cluster-network.png](docs/img/architecture.jpg "Cluster Network")
 
 ## Authors
 
@@ -14,9 +14,7 @@ Main repository of the LIARA Smart Home Cluster Architecture (SHCA).
 
 Download the latest FlOS operating system image [here](https://github.com/FlorentinTh/FlOS/releases).
 
-Flash your image on the SD card with the latest version of [Etcher](https://www.balena.io/etcher/) with the following parameters :
-
-![Etcher Settings](docs/img/etcher-settings.png "Etcher Settings")
+Flash your image on the SD card with the latest version of [balena Etcher](https://www.balena.io/etcher/) with the following parameters :
 
 ## Documentation
 
@@ -37,8 +35,7 @@ Flash your image on the SD card with the latest version of [Etcher](https://www.
   * [2.5. Private Registry](docs/00-cluster.md#4-private-registry)
 
 * [3. Databases](docs/20-databases.md)
-  * **(deprecated)** [3.1. SQL - MariaDB](docs/20-databases.md#1-configure-mariadb-multi-master-replication)
-  * [3.2. NoSQL - MongoDB](docs/20-databases.md#2-configure-mongodb-replica-set)
+  * [3.1. NoSQL - MongoDB](docs/20-databases.md#2-configure-mongodb-replica-set)
 
 ### Annexes
 

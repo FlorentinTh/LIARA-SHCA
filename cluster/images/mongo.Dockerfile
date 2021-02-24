@@ -1,4 +1,4 @@
-FROM mongo:4.2
+FROM mongo:4
 
 RUN mkdir -p /keys
 COPY ./secrets/mongo-keyfile /keys/mongo-keyfile
