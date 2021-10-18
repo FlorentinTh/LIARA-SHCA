@@ -1,6 +1,6 @@
 # LIARA-SHCA
 
-[![GitHub release](https://img.shields.io/github/release/FlorentinTh/LIARA-SHCA.svg?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/releases) [![GitHub](https://img.shields.io/github/license/FlorentinTh/LIARA-SHCA.svg?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/blob/master/LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/FlorentinTh/LIARA-SHCA?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/commits/master)
+[![GitHub](https://img.shields.io/github/license/FlorentinTh/LIARA-SHCA?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/blob/master/LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/FlorentinTh/LIARA-SHCA?style=flat-square)](https://github.com/FlorentinTh/LIARA-SHCA/commits/master)
 
 **Main repository of the LIARA Smart Home Cluster Architecture (SHCA).**
 
